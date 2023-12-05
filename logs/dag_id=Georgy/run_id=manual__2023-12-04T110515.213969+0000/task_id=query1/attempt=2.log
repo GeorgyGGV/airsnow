@@ -1,0 +1,117 @@
+[2023-12-04T16:08:46.000+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Georgy.query1 manual__2023-12-04T11:05:15.213969+00:00 [queued]>
+[2023-12-04T16:08:46.007+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Georgy.query1 manual__2023-12-04T11:05:15.213969+00:00 [queued]>
+[2023-12-04T16:08:46.007+0000] {taskinstance.py:1359} INFO - Starting attempt 2 of 4
+[2023-12-04T16:08:46.018+0000] {taskinstance.py:1380} INFO - Executing <Task(SQLExecuteQueryOperator): query1> on 2023-12-04 11:05:15.213969+00:00
+[2023-12-04T16:08:46.023+0000] {standard_task_runner.py:57} INFO - Started process 300 to run task
+[2023-12-04T16:08:46.025+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Georgy', 'query1', 'manual__2023-12-04T11:05:15.213969+00:00', '--job-id', '105', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmpu4pyfcvs']
+[2023-12-04T16:08:46.026+0000] {standard_task_runner.py:85} INFO - Job 105: Subtask query1
+[2023-12-04T16:08:46.057+0000] {task_command.py:415} INFO - Running <TaskInstance: Georgy.query1 manual__2023-12-04T11:05:15.213969+00:00 [running]> on host 435c91f40721
+[2023-12-04T16:08:46.108+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Gio' AIRFLOW_CTX_DAG_ID='Georgy' AIRFLOW_CTX_TASK_ID='query1' AIRFLOW_CTX_EXECUTION_DATE='2023-12-04T11:05:15.213969+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-04T11:05:15.213969+00:00'
+[2023-12-04T16:08:46.109+0000] {sql.py:274} INFO - Executing: CREATE TABLE test (col INT);
+[2023-12-04T16:08:46.117+0000] {base.py:73} INFO - Using connection ID 'snowflake_default' for task execution.
+[2023-12-04T16:08:46.149+0000] {base.py:73} INFO - Using connection ID 'snowflake_default' for task execution.
+[2023-12-04T16:08:46.150+0000] {connection.py:314} INFO - Snowflake Connector for Python Version: 3.1.1, Python Version: 3.8.18, Platform: Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.2.5
+[2023-12-04T16:08:46.150+0000] {connection.py:1050} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2023-12-04T16:08:46.151+0000] {connection.py:1068} INFO - Setting use_openssl_only mode to False
+[2023-12-04T16:08:54.160+0000] {connectionpool.py:812} WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<snowflake.connector.vendored.urllib3.connection.HTTPSConnection object at 0x7f4168560f10>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': //iy34150.europe-west4.snowflakecomputing.com:443/session/v1/login-request?request_id=320d0a16-5596-4d40-9d47-8965b2f6abf4&databaseName=TASKS&schemaName=PUBLIC&warehouse=COMPUTE_WH&roleName=ACCOUNTADMIN
+[2023-12-04T16:09:11.174+0000] {connectionpool.py:812} WARNING - Retrying (Retry(total=0, connect=None, read=None, redirect=None, status=None)) after connection broken by 'NewConnectionError('<snowflake.connector.vendored.urllib3.connection.HTTPSConnection object at 0x7f416acec7c0>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution')': //iy34150.europe-west4.snowflakecomputing.com:443/session/v1/login-request?request_id=e3e281a9-bcbb-431d-bd1c-6cbc856707d7&databaseName=TASKS&schemaName=PUBLIC&warehouse=COMPUTE_WH&roleName=ACCOUNTADMIN
+[2023-12-04T16:09:19.179+0000] {taskinstance.py:1935} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/connection.py", line 174, in _new_conn
+    conn = connection.create_connection(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/util/connection.py", line 72, in create_connection
+    for res in socket.getaddrinfo(host, port, family, socket.SOCK_STREAM):
+  File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/connectionpool.py", line 703, in urlopen
+    httplib_response = self._make_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/connectionpool.py", line 386, in _make_request
+    self._validate_conn(conn)
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/connectionpool.py", line 1042, in _validate_conn
+    conn.connect()
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/connection.py", line 363, in connect
+    self.sock = conn = self._new_conn()
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/connection.py", line 186, in _new_conn
+    raise NewConnectionError(
+snowflake.connector.vendored.urllib3.exceptions.NewConnectionError: <snowflake.connector.vendored.urllib3.connection.HTTPSConnection object at 0x7f4168560c70>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/requests/adapters.py", line 487, in send
+    resp = conn.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/connectionpool.py", line 815, in urlopen
+    return self.urlopen(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/connectionpool.py", line 787, in urlopen
+    retries = retries.increment(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/urllib3/util/retry.py", line 592, in increment
+    raise MaxRetryError(_pool, url, error or ResponseError(cause))
+snowflake.connector.vendored.urllib3.exceptions.MaxRetryError: HTTPSConnectionPool(host='https', port=443): Max retries exceeded with url: //iy34150.europe-west4.snowflakecomputing.com:443/session/v1/login-request?request_id=320d0a16-5596-4d40-9d47-8965b2f6abf4&databaseName=TASKS&schemaName=PUBLIC&warehouse=COMPUTE_WH&roleName=ACCOUNTADMIN (Caused by NewConnectionError('<snowflake.connector.vendored.urllib3.connection.HTTPSConnection object at 0x7f4168560c70>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/network.py", line 1084, in _request_exec
+    raw_ret = session.request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/requests/sessions.py", line 587, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/requests/sessions.py", line 701, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/vendored/requests/adapters.py", line 520, in send
+    raise ConnectionError(e, request=request)
+snowflake.connector.vendored.requests.exceptions.ConnectionError: HTTPSConnectionPool(host='https', port=443): Max retries exceeded with url: //iy34150.europe-west4.snowflakecomputing.com:443/session/v1/login-request?request_id=320d0a16-5596-4d40-9d47-8965b2f6abf4&databaseName=TASKS&schemaName=PUBLIC&warehouse=COMPUTE_WH&roleName=ACCOUNTADMIN (Caused by NewConnectionError('<snowflake.connector.vendored.urllib3.connection.HTTPSConnection object at 0x7f4168560c70>: Failed to establish a new connection: [Errno -3] Temporary failure in name resolution'))
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/connection.py", line 1193, in _authenticate
+    auth.authenticate(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/auth/_auth.py", line 250, in authenticate
+    ret = self._rest._post_request(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/network.py", line 730, in _post_request
+    ret = self.fetch(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/network.py", line 849, in fetch
+    ret = self._request_exec_wrapper(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/network.py", line 987, in _request_exec_wrapper
+    raise e
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/network.py", line 891, in _request_exec_wrapper
+    return_object = self._request_exec(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/network.py", line 1168, in _request_exec
+    raise OperationalError(
+snowflake.connector.errors.OperationalError: 251011: 251011: ConnectionTimeout occurred. Will be handled by authenticator
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/common/sql/operators/sql.py", line 280, in execute
+    output = hook.run(
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/snowflake/hooks/snowflake.py", line 409, in run
+    with closing(self.get_conn()) as conn:
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/providers/snowflake/hooks/snowflake.py", line 303, in get_conn
+    conn = connector.connect(**conn_config)
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/__init__.py", line 51, in Connect
+    return SnowflakeConnection(**kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/connection.py", line 353, in __init__
+    self.connect(**kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/connection.py", line 625, in connect
+    self.__open_connection()
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/connection.py", line 898, in __open_connection
+    self.authenticate_with_retry(self.auth_class)
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/connection.py", line 1167, in authenticate_with_retry
+    self._authenticate(auth_instance)
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/connection.py", line 1238, in _authenticate
+    raise auth_op from e
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/connection.py", line 1215, in _authenticate
+    auth_instance.handle_timeout(
+  File "/home/airflow/.local/lib/python3.8/site-packages/snowflake/connector/auth/by_plugin.py", line 219, in handle_timeout
+    raise error
+snowflake.connector.errors.OperationalError: 250001: 250001: Could not connect to Snowflake backend after 1 attempt(s).Aborting
+[2023-12-04T16:09:19.186+0000] {taskinstance.py:1398} INFO - Marking task as UP_FOR_RETRY. dag_id=Georgy, task_id=query1, execution_date=20231204T110515, start_date=20231204T160846, end_date=20231204T160919
+[2023-12-04T16:09:19.200+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 105 for task query1 (250001: 250001: Could not connect to Snowflake backend after 1 attempt(s).Aborting; 300)
+[2023-12-04T16:09:19.219+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2023-12-04T16:09:19.235+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

@@ -1,0 +1,16 @@
+[2023-12-04T10:24:13.984+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Georgy.setting_kaggle scheduled__2023-12-01T21:10:00+00:00 [queued]>
+[2023-12-04T10:24:13.991+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Georgy.setting_kaggle scheduled__2023-12-01T21:10:00+00:00 [queued]>
+[2023-12-04T10:24:13.992+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 4
+[2023-12-04T10:24:14.005+0000] {taskinstance.py:1380} INFO - Executing <Task(BashOperator): setting_kaggle> on 2023-12-01 21:10:00+00:00
+[2023-12-04T10:24:14.011+0000] {standard_task_runner.py:57} INFO - Started process 1954 to run task
+[2023-12-04T10:24:14.013+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Georgy', 'setting_kaggle', 'scheduled__2023-12-01T21:10:00+00:00', '--job-id', '51', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmppnymb3bg']
+[2023-12-04T10:24:14.014+0000] {standard_task_runner.py:85} INFO - Job 51: Subtask setting_kaggle
+[2023-12-04T10:24:14.048+0000] {task_command.py:415} INFO - Running <TaskInstance: Georgy.setting_kaggle scheduled__2023-12-01T21:10:00+00:00 [running]> on host ed47267dc344
+[2023-12-04T10:24:14.102+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Gio' AIRFLOW_CTX_DAG_ID='Georgy' AIRFLOW_CTX_TASK_ID='setting_kaggle' AIRFLOW_CTX_EXECUTION_DATE='2023-12-01T21:10:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2023-12-01T21:10:00+00:00'
+[2023-12-04T10:24:14.103+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2023-12-04T10:24:14.104+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'mkdir -p ~/.kaggle']
+[2023-12-04T10:24:14.112+0000] {subprocess.py:86} INFO - Output:
+[2023-12-04T10:24:14.115+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2023-12-04T10:24:14.132+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=Georgy, task_id=setting_kaggle, execution_date=20231201T211000, start_date=20231204T102413, end_date=20231204T102414
+[2023-12-04T10:24:14.186+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2023-12-04T10:24:14.201+0000] {taskinstance.py:2776} INFO - 0 downstream tasks scheduled from follow-on schedule check

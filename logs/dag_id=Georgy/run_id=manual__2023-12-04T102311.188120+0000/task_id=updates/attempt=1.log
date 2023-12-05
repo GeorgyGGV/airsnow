@@ -1,0 +1,33 @@
+[2023-12-04T10:23:26.920+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Georgy.updates manual__2023-12-04T10:23:11.188120+00:00 [queued]>
+[2023-12-04T10:23:26.927+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Georgy.updates manual__2023-12-04T10:23:11.188120+00:00 [queued]>
+[2023-12-04T10:23:26.928+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 4
+[2023-12-04T10:23:26.940+0000] {taskinstance.py:1380} INFO - Executing <Task(BashOperator): updates> on 2023-12-04 10:23:11.188120+00:00
+[2023-12-04T10:23:26.944+0000] {standard_task_runner.py:57} INFO - Started process 1915 to run task
+[2023-12-04T10:23:26.947+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Georgy', 'updates', 'manual__2023-12-04T10:23:11.188120+00:00', '--job-id', '46', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmpdc0zlet4']
+[2023-12-04T10:23:26.948+0000] {standard_task_runner.py:85} INFO - Job 46: Subtask updates
+[2023-12-04T10:23:26.979+0000] {task_command.py:415} INFO - Running <TaskInstance: Georgy.updates manual__2023-12-04T10:23:11.188120+00:00 [running]> on host ed47267dc344
+[2023-12-04T10:23:27.035+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Gio' AIRFLOW_CTX_DAG_ID='Georgy' AIRFLOW_CTX_TASK_ID='updates' AIRFLOW_CTX_EXECUTION_DATE='2023-12-04T10:23:11.188120+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-04T10:23:11.188120+00:00'
+[2023-12-04T10:23:27.037+0000] {subprocess.py:63} INFO - Tmp dir root location: /tmp
+[2023-12-04T10:23:27.037+0000] {subprocess.py:75} INFO - Running command: ['/bin/bash', '-c', 'pip3 install kaggle']
+[2023-12-04T10:23:27.047+0000] {subprocess.py:86} INFO - Output:
+[2023-12-04T10:23:28.050+0000] {subprocess.py:93} INFO - Defaulting to user installation because normal site-packages is not writeable
+[2023-12-04T10:23:28.237+0000] {subprocess.py:93} INFO - Requirement already satisfied: kaggle in /home/***/.local/lib/python3.8/site-packages (1.5.16)
+[2023-12-04T10:23:28.242+0000] {subprocess.py:93} INFO - Requirement already satisfied: tqdm in /home/***/.local/lib/python3.8/site-packages (from kaggle) (4.66.1)
+[2023-12-04T10:23:28.243+0000] {subprocess.py:93} INFO - Requirement already satisfied: requests in /home/***/.local/lib/python3.8/site-packages (from kaggle) (2.31.0)
+[2023-12-04T10:23:28.243+0000] {subprocess.py:93} INFO - Requirement already satisfied: python-slugify in /home/***/.local/lib/python3.8/site-packages (from kaggle) (8.0.1)
+[2023-12-04T10:23:28.244+0000] {subprocess.py:93} INFO - Requirement already satisfied: urllib3 in /home/***/.local/lib/python3.8/site-packages (from kaggle) (1.26.16)
+[2023-12-04T10:23:28.244+0000] {subprocess.py:93} INFO - Requirement already satisfied: bleach in /home/***/.local/lib/python3.8/site-packages (from kaggle) (6.1.0)
+[2023-12-04T10:23:28.244+0000] {subprocess.py:93} INFO - Requirement already satisfied: certifi in /home/***/.local/lib/python3.8/site-packages (from kaggle) (2023.7.22)
+[2023-12-04T10:23:28.245+0000] {subprocess.py:93} INFO - Requirement already satisfied: python-dateutil in /home/***/.local/lib/python3.8/site-packages (from kaggle) (2.8.2)
+[2023-12-04T10:23:28.245+0000] {subprocess.py:93} INFO - Requirement already satisfied: six>=1.10 in /home/***/.local/lib/python3.8/site-packages (from kaggle) (1.16.0)
+[2023-12-04T10:23:28.249+0000] {subprocess.py:93} INFO - Requirement already satisfied: webencodings in /home/***/.local/lib/python3.8/site-packages (from bleach->kaggle) (0.5.1)
+[2023-12-04T10:23:28.254+0000] {subprocess.py:93} INFO - Requirement already satisfied: text-unidecode>=1.3 in /home/***/.local/lib/python3.8/site-packages (from python-slugify->kaggle) (1.3)
+[2023-12-04T10:23:28.260+0000] {subprocess.py:93} INFO - Requirement already satisfied: idna<4,>=2.5 in /home/***/.local/lib/python3.8/site-packages (from requests->kaggle) (3.4)
+[2023-12-04T10:23:28.260+0000] {subprocess.py:93} INFO - Requirement already satisfied: charset-normalizer<4,>=2 in /home/***/.local/lib/python3.8/site-packages (from requests->kaggle) (3.2.0)
+[2023-12-04T10:23:31.929+0000] {subprocess.py:93} INFO - 
+[2023-12-04T10:23:31.930+0000] {subprocess.py:93} INFO - [notice] A new release of pip is available: 23.0.1 -> 23.3.1
+[2023-12-04T10:23:31.931+0000] {subprocess.py:93} INFO - [notice] To update, run: pip install --upgrade pip
+[2023-12-04T10:23:32.124+0000] {subprocess.py:97} INFO - Command exited with return code 0
+[2023-12-04T10:23:32.144+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=Georgy, task_id=updates, execution_date=20231204T102311, start_date=20231204T102326, end_date=20231204T102332
+[2023-12-04T10:23:32.160+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2023-12-04T10:23:32.181+0000] {taskinstance.py:2776} INFO - 1 downstream tasks scheduled from follow-on schedule check

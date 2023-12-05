@@ -73,3 +73,5 @@ with dag:
 
 
 creating_v_table >> creating_col_table >> creating_max_rating_table
+
+# raw version

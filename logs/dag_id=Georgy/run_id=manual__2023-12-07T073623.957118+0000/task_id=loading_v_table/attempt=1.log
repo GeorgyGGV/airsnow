@@ -1,0 +1,60 @@
+[2023-12-07T07:36:27.018+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: Georgy.loading_v_table manual__2023-12-07T07:36:23.957118+00:00 [queued]>
+[2023-12-07T07:36:27.026+0000] {taskinstance.py:1157} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: Georgy.loading_v_table manual__2023-12-07T07:36:23.957118+00:00 [queued]>
+[2023-12-07T07:36:27.027+0000] {taskinstance.py:1359} INFO - Starting attempt 1 of 1
+[2023-12-07T07:36:27.042+0000] {taskinstance.py:1380} INFO - Executing <Task(SnowflakeOperator): loading_v_table> on 2023-12-07 07:36:23.957118+00:00
+[2023-12-07T07:36:27.046+0000] {standard_task_runner.py:57} INFO - Started process 74 to run task
+[2023-12-07T07:36:27.049+0000] {standard_task_runner.py:84} INFO - Running: ['***', 'tasks', 'run', 'Georgy', 'loading_v_table', 'manual__2023-12-07T07:36:23.957118+00:00', '--job-id', '196', '--raw', '--subdir', 'DAGS_FOLDER/test.py', '--cfg-path', '/tmp/tmp_jut2leu']
+[2023-12-07T07:36:27.050+0000] {standard_task_runner.py:85} INFO - Job 196: Subtask loading_v_table
+[2023-12-07T07:36:27.085+0000] {task_command.py:415} INFO - Running <TaskInstance: Georgy.loading_v_table manual__2023-12-07T07:36:23.957118+00:00 [running]> on host 5e36d60cd939
+[2023-12-07T07:36:27.149+0000] {taskinstance.py:1660} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='Gio' AIRFLOW_CTX_DAG_ID='Georgy' AIRFLOW_CTX_TASK_ID='loading_v_table' AIRFLOW_CTX_EXECUTION_DATE='2023-12-07T07:36:23.957118+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2023-12-07T07:36:23.957118+00:00'
+[2023-12-07T07:36:27.150+0000] {sql.py:274} INFO - Executing: 
+            MERGE INTO TASKS.TASK_1.V_TABLE
+                USING ( 
+                SELECT CSV_PARSER.V
+                -- Query the stage for one file or use a pattern for multiple
+                FROM @TASKS.TASK_1.GCS_STAGE (FILE_FORMAT => TASKS.TASK_1.TEXT_FORMAT, PATTERN=>'.*.csv') STG
+                -- Lateral join to call our UDTF
+                JOIN LATERAL TASKS.TASK_1.PARSE_CSV(STG.$1, ',', '"') 
+                -- Partition by file to support multiple files at once
+                OVER (PARTITION BY METADATA$FILENAME 
+                -- Order by row number to ensure headers are first in each window
+                ORDER BY METADATA$FILE_ROW_NUMBER) AS CSV_PARSER ) AS src ON V_TABLE.v: ID = src.v: ID
+                WHEN MATCHED THEN UPDATE SET  V_TABLE.v = src.v
+                WHEN NOT MATCHED THEN INSERT (V_TABLE.v) VALUES (src.v);
+        
+[2023-12-07T07:36:27.158+0000] {base.py:73} INFO - Using connection ID 'snowflake' for task execution.
+[2023-12-07T07:36:27.166+0000] {base.py:73} INFO - Using connection ID 'snowflake' for task execution.
+[2023-12-07T07:36:27.166+0000] {connection.py:314} INFO - Snowflake Connector for Python Version: 3.1.1, Python Version: 3.8.18, Platform: Linux-5.15.133.1-microsoft-standard-WSL2-x86_64-with-glibc2.2.5
+[2023-12-07T07:36:27.167+0000] {connection.py:1050} INFO - This connection is in OCSP Fail Open Mode. TLS Certificates would be checked for validity and revocation status. Any other Certificate Revocation related exceptions or OCSP Responder failures would be disregarded in favor of connectivity.
+[2023-12-07T07:36:27.167+0000] {connection.py:1060} INFO - THIS CONNECTION IS IN INSECURE MODE. IT MEANS THE CERTIFICATE WILL BE VALIDATED BUT THE CERTIFICATE REVOCATION STATUS WILL NOT BE CHECKED.
+[2023-12-07T07:36:27.167+0000] {connection.py:1068} INFO - Setting use_openssl_only mode to False
+[2023-12-07T07:36:27.473+0000] {ssl_wrap_socket.py:100} INFO - THIS CONNECTION IS IN INSECURE MODE. IT MEANS THE CERTIFICATE WILL BE VALIDATED BUT THE CERTIFICATE REVOCATION STATUS WILL NOT BE CHECKED.
+[2023-12-07T07:36:27.752+0000] {cursor.py:804} INFO - query: [ALTER SESSION SET autocommit=False]
+[2023-12-07T07:36:27.881+0000] {cursor.py:817} INFO - query execution done
+[2023-12-07T07:36:27.881+0000] {cursor.py:959} INFO - Number of results in first chunk: 1
+[2023-12-07T07:36:27.882+0000] {sql.py:418} INFO - Running statement: MERGE INTO TASKS.TASK_1.V_TABLE
+                USING ( 
+                SELECT CSV_PARSER.V
+                -- Query the stage for one file or use a pattern for multiple
+                FROM @TASKS.TASK_1.GCS_STAGE (FILE_FORMAT => TASKS.TASK_1.TEXT_FORMAT, PATTERN=>'.*.csv') STG
+                -- Lateral join to call our UDTF
+                JOIN LATERAL TASKS.TASK_1.PARSE_CSV(STG.$1, ',', '"') 
+                -- Partition by file to support multiple files at once
+                OVER (PARTITION BY METADATA$FILENAME 
+                -- Order by row number to ensure headers are first in each window
+                ORDER BY METADATA$FILE_ROW_NUMBER) AS CSV_PARSER ) AS src ON V_TABLE.v: ID = src.v: ID
+                WHEN MATCHED THEN UPDATE SET  V_TABLE.v = src.v
+                WHEN NOT MATCHED THEN INSERT (V_TABLE.v) VALUES (src.v);, parameters: None
+[2023-12-07T07:36:27.882+0000] {cursor.py:804} INFO - query: [MERGE INTO TASKS.TASK_1.V_TABLE USING ( SELECT CSV_PARSER.V -- Query the stage f...]
+[2023-12-07T07:36:33.760+0000] {cursor.py:817} INFO - query execution done
+[2023-12-07T07:36:33.760+0000] {sql.py:427} INFO - Rows affected: 63543
+[2023-12-07T07:36:33.761+0000] {snowflake.py:427} INFO - Rows affected: 63543
+[2023-12-07T07:36:33.761+0000] {snowflake.py:428} INFO - Snowflake query id: 01b0d308-0000-c4f8-0001-691a000231b2
+[2023-12-07T07:36:33.761+0000] {cursor.py:804} INFO - query: [COMMIT]
+[2023-12-07T07:36:33.941+0000] {cursor.py:817} INFO - query execution done
+[2023-12-07T07:36:33.941+0000] {cursor.py:959} INFO - Number of results in first chunk: 1
+[2023-12-07T07:36:33.942+0000] {connection.py:640} INFO - closed
+[2023-12-07T07:36:34.028+0000] {connection.py:646} INFO - No async queries seem to be running, deleting session
+[2023-12-07T07:36:34.181+0000] {taskinstance.py:1398} INFO - Marking task as SUCCESS. dag_id=Georgy, task_id=loading_v_table, execution_date=20231207T073623, start_date=20231207T073627, end_date=20231207T073634
+[2023-12-07T07:36:34.232+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2023-12-07T07:36:34.250+0000] {taskinstance.py:2776} INFO - 1 downstream tasks scheduled from follow-on schedule check
